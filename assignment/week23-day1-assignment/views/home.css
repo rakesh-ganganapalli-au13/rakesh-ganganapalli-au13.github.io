@@ -1,0 +1,19 @@
+
+    body{
+        background-color: rgb(240, 181, 201);
+    }
+    #about{
+        background-color:rgb(228, 145, 200) ;
+        text-align: start;
+        
+    }
+    #experience{
+        background-color: rgb(154, 230, 158);
+        
+    }
+    #contact{
+        text-align: center;
+    }
+    a{
+        text-decoration: none;
+    }
