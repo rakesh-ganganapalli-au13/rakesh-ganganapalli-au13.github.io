@@ -1,0 +1,14 @@
+ul.gallery{
+    padding: 0;
+}
+
+ul.gallery li:first-child{
+
+    margin-left: 0;
+}
+
+ul.gallery{
+    margin: 20px;
+    display: inline-block;
+    list-style: none;
+}

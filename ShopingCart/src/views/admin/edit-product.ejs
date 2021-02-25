@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for="Discription">Discription</label>
-        <textarea name="discription" cols="20" rows="10" value="<%= discription %>" placeholder="Enter description" class="form-control"></textarea>
+        <textarea name="discription" cols="20" rows="10"  placeholder="Enter description" class="form-control"> <%= discription %></textarea>
     </div>
 
     <div class="form-group">
@@ -53,12 +53,12 @@
 
 <h3 class="page-header">Gallery</h3>
 
-<ul class="gallery">
+<ul class="gallery" >
     <% galleryImages.forEach(function(image)  { %>
         <% if(image != 'thumbnail') {%>
             <li>
                 <img src="product_images/<%= id %>gallery/thumbs/<%= image %>" alt="">
-                <a href="api/admin/products/delete-image/<%= image %>?id=<%= id %>" class="confirmDeletion">Delete</a>
+                <a href="/api/admin/products/delete-image/<%= image %> ? id = <%= id %>" class="confirmDeletion">Delete</a>
             </li>
         <% } %>
     <% }) %>
@@ -69,11 +69,22 @@
 
 <br><br>
 
-<form action="/api/admin/products/product-gallery/<% id %>" method="POST" enctype="multipart/form-data" class='dropzone' id="dropzoneForm"></form>
+<form action="/api/admin/products/product-gallery/<%= id %>" method="POST" enctype="multipart/form-data" class='dropzone' id="dropzoneForm">
+
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload">
+    </div>
+
+</form>
+
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/basic.css">
 <link rel="stylesheet" href="	https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+
+
 
 <script>
     Dropzone.options.dropzoneForm = {
@@ -81,10 +92,10 @@
         init : function() {
             this.on('queuecomplete',function (file) {
 
-                setTimeout(function () {
+                setTimeout(()=>{
                     location.reload()
-                },100000)
-                
+                },1000)
+   
             })
             
         }

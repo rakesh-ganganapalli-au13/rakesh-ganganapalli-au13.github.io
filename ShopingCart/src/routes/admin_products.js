@@ -11,6 +11,7 @@ const path = require('path')
 const products = require('../models/products')
 //category model
 const categories = require('../models/category');
+const { writeFileSync } = require("fs-extra");
 
 
 
@@ -315,20 +316,66 @@ router.post('/edit-product/:id',(req,res)=>{
         })
     }
 
- 
-
-
-
-
-
 })
 
 
 
 
 
+
+//post product gallery
+
+router.post('/product-gallery/:id',async(req,res)=>{
+
+   let productImgs = req.files.file
+   let id          = req.params.id
+   let path        = 'src/public/product_images/' + id + '/gallery/' + req.files.file.name;
+   let thumbpath   = 'src/public/product_images/' + id + '/gallery/thumbnail/' + req.files.file.name;
+
+   productImgs.mv(path,(err)=>{
+       if(err) return console.log(err)
+
+       resizeImg(fs.readFileSync(path),{width : 100,height:100}).then((buf)=>{
+           fs.writeFileSync(thumbpath, buf)
+       })
+   })
+    
+})
+
+
+
+
+
+/*get delete image */
+
+router.get('/delete-image/:image',(req,res)=>{
+
+    let originalImg   = 'src/public/product_images/' + req.query.id + '/gallery/' + req.params.image;
+    let thumbImg       = 'src/public/product_images/' + req.query.id + '/gallery/thumbnail/' + req.params.image;
+
+   fs.remove(originalImg,(err)=>{
+       if(err){
+           console.log(err);
+       }
+       fs.remove(thumbImg,(err)=>{
+           if(err){
+               console.log(err)
+           }else{
+           
+            res.redirect('/api/admin/products/edit-product/'+ req.query.id);
+            console.log('366')
+           }
+       })
+   })
+
+    
+})
+
+
+
 /* delete page
 Method : post*/
+
 // router.get('/delete-page/:id',async(req,res)=>{
 
 //     await pages.findByIdAndDelete({_id : req.params.id}, (err)=>{
@@ -343,8 +390,6 @@ Method : post*/
 
     
 // })
-
-
 
 
 
