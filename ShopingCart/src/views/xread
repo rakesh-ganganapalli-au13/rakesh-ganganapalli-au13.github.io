@@ -1,0 +1,30 @@
+bootstrap 
+
+....................................................................................................................
+
+NAVBAR
+
+
+*navbar-inverse  => it will inverse the color gives black but in my project i will override that in blue colour
+
+*container fluid => it indicates that nav bar should be fill entire  screen width
+
+*navbar header  => it wraps the navbar brand and navbar toggle and renders properly
+
+*navbar-brand   => it is used to show your band name
+
+*nav            => gives the padding anmarging and decoraton to list items
+*nav-navbar     => The navbar-nav class used for the list attribute. List attributes are the index or heading of the content for the websites.
+                    if we dont'use this class then list will be displayed in vertical order
+
+.................................................................................................................
+ADMIN PAGE
+
+
+page-title          => gives the some impact to text
+
+btn and btn-primary => btn gives the button nature and btn-primary gives primary color(blue) to the button
+
+for-group => to wrap the all the form elements using this
+
+form-control => gives style to inputs meanes create a div anssign a totel width

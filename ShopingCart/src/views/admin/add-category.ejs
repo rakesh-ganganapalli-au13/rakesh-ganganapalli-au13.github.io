@@ -1,0 +1,27 @@
+<%- include('../layouts/adminheader.ejs') %>
+
+
+
+<h2 class="page-title">Add a category</h2>
+<a href="/api/admin/categories" class="btn btn-primary">Back to All categories</a>
+
+<form method="POST" action="/api/admin/categories/add-category">
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name = "title" value="<%=title%>" placeholder="Enter title" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="slug">Slug</label>
+        <input type="text" name="slug" value="<%=slug%>" placeholder="Enter slug" class="form-control">
+    </div>
+
+    
+    <button>Submit</button> 
+   
+    
+    
+</form>
+
+<%- include('../layouts/adminfooter.ejs')  %>

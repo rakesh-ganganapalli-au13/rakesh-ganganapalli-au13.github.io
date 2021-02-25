@@ -1,0 +1,95 @@
+<%- include('../layouts/adminheader.ejs') %>
+
+
+
+<h2 class="page-title">Edit product</h2>
+<a href="/api/admin/products" class="btn btn-primary">Back to All products</a>
+
+<form method="POST" action=" /api/admin/products/edit-product/<%= id %>" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name = "title" value="<%=title%>" placeholder="Enter title" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" name="price" value="<%=price%>" placeholder="Enter price" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="Discription">Discription</label>
+        <textarea name="discription" cols="20" rows="10" value="<%= discription %>" placeholder="Enter description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Category">Category</label>
+        <select name="category" class="form-control">
+            <% category.forEach((cat)=> { %>
+                <option value="<%= cat.slug %>"><%= cat.slug %></option>
+
+                <%if (cat.slug == category2) { %>
+                    selected : "selected"
+                <% } %>
+
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="image">Upload Image</label>
+        <input type="file" name="image" class="form-control"  >
+        <img src="#"  alt="">
+     </div>
+
+    <input type="hidden" name = 'id' value="<%= id %>">
+    
+    <button>Submit</button> 
+   
+</form>
+
+
+<hr>
+
+<h3 class="page-header">Gallery</h3>
+
+<ul class="gallery">
+    <% galleryImages.forEach(function(image)  { %>
+        <% if(image != 'thumbnail') {%>
+            <li>
+                <img src="product_images/<%= id %>gallery/thumbs/<%= image %>" alt="">
+                <a href="api/admin/products/delete-image/<%= image %>?id=<%= id %>" class="confirmDeletion">Delete</a>
+            </li>
+        <% } %>
+    <% }) %>
+
+   %>
+  
+</ul>
+
+<br><br>
+
+<form action="/api/admin/products/product-gallery/<% id %>" method="POST" enctype="multipart/form-data" class='dropzone' id="dropzoneForm"></form>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/basic.css">
+<link rel="stylesheet" href="	https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+
+<script>
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles : 'image/*',
+        init : function() {
+            this.on('queuecomplete',function (file) {
+
+                setTimeout(function () {
+                    location.reload()
+                },100000)
+                
+            })
+            
+        }
+    }
+</script>
+
+
+<%- include('../layouts/adminfooter.ejs')  %>
