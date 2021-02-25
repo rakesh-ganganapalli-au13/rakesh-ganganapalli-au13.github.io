@@ -256,7 +256,7 @@ router.post('/edit-product/:id',(req,res)=>{
          let id          = req.params.id
  
      const errors = req.validationErrors()
-     console.log(errors)
+     console.log(pimage)
     if(errors) {
         
         req.session.errors = errors;
@@ -293,9 +293,8 @@ router.post('/edit-product/:id',(req,res)=>{
                         if(err) return console.log(err)
 
                         if(imgFile != ''){
-                            if(p.image != ''){
+                            if(pimage != ''){
                                 fs.remove('src/public/product_images/'+id+'/'+pimage, (err)=>{
-
                                     if(err) return console.log(err)
                                 })
                             }
