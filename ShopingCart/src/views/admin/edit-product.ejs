@@ -58,7 +58,7 @@
         <% if(image != 'thumbnail') {%>
             <li>
                 <img src="product_images/<%= id %>gallery/thumbs/<%= image %>" alt="">
-                <a href="/api/admin/products/delete-image/<%= image %> ? id = <%= id %>" class="confirmDeletion">Delete</a>
+                <a href="/api/admin/products/delete-image/<%= image %> ? id = <%= id %>" >delete</a>
             </li>
         <% } %>
     <% }) %>

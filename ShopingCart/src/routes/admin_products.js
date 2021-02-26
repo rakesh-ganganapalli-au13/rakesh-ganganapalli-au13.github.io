@@ -2,7 +2,6 @@ const router            = require("express").Router();
 const fs                = require('fs-extra')
 const mkdirp            = require('mkdirp')
 const resizeImg         = require('resize-img')
-require('express-validator')
 const path = require('path')
 
 // const {} = require('express-fileupload')
@@ -12,6 +11,8 @@ const products = require('../models/products')
 //category model
 const categories = require('../models/category');
 const { writeFileSync } = require("fs-extra");
+const { isValidObjectId } = require("mongoose");
+
 
 
 
@@ -350,46 +351,54 @@ router.post('/product-gallery/:id',async(req,res)=>{
 
 router.get('/delete-image/:image',(req,res)=>{
 
-    let originalImg   = 'src/public/product_images/' + req.query.id + '/gallery/' + req.params.image;
-    let thumbImg       = 'src/public/product_images/' + req.query.id + '/gallery/thumbnail/' + req.params.image;
+    let id1 = (req.query)
+    console.log(356)
+     
 
-   fs.remove(originalImg,(err)=>{
-       if(err){
-           console.log(err);
-       }
-       fs.remove(thumbImg,(err)=>{
-           if(err){
-               console.log(err)
-           }else{
+
+//     let originalImg   = 'src/public/product_images/' + req.query.id + '/gallery/' + req.params.image;
+//     let thumbImg       = 'src/public/product_images/' + req.query.id + '/gallery/thumbnail/' + req.params.image;
+
+//    fs.remove(originalImg,(err)=>{
+//        if(err){
+//            console.log(err);
+//        }
+//        fs.remove(thumbImg,(err)=>{
+//            if(err){
+//                console.log(err)
+//            }else{
            
-            res.redirect('/api/admin/products/edit-product/'+ req.query.id);
-            console.log('366')
-           }
-       })
-   })
+//             res.redirect('/api/admin/products/edit-product/'+ req.query.id);
+//             console.log('366')
+//            }
+//        })
+//    })
 
     
 })
 
 
 
-/* delete page
+/* delete product
 Method : post*/
 
-// router.get('/delete-page/:id',async(req,res)=>{
+router.get('/delete-product/:id',async(req,res)=>{
 
-//     await pages.findByIdAndDelete({_id : req.params.id}, (err)=>{
+    let id = req.params.id;
+    let path = 'src/public/product_images/' + id
 
-//         if(err){
-//             console.log(err)
-//         }
+    fs.remove(path,(err)=>{
+        if(err) return console.log(err)
 
-//         res.redirect( '/api/admin/pages')
+        products.findByIdAndRemove(id,(err)=>{
+            if(err) return console.log(err)
 
-//     })
+            // console.log('deleted peoduct')
+            res.redirect('/api/admin/products')
+        })
+    })
 
-    
-// })
+})
 
 
 
