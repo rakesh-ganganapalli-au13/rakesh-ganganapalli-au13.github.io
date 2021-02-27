@@ -258,7 +258,7 @@ router.post('/edit-product/:id',(req,res)=>{
          let id          = req.params.id
  
      const errors = req.validationErrors()
-     console.log(pimage)
+    //  console.log(pimage)
     if(errors) {
         
         req.session.errors = errors;
@@ -351,28 +351,34 @@ router.post('/product-gallery/:id',async(req,res)=>{
 
 router.get('/delete-image/:image',(req,res)=>{
 
-    let id1 = (req.query)
-    console.log(356)
+    for (const key in req.query) {
+        var id = req.query[key]
+      }
+      
+    
+    console.log(id)
+    
      
 
 
-//     let originalImg   = 'src/public/product_images/' + req.query.id + '/gallery/' + req.params.image;
-//     let thumbImg       = 'src/public/product_images/' + req.query.id + '/gallery/thumbnail/' + req.params.image;
+    let originalImg   = 'src/public/product_images/'+id+'/gallery/' + req.params.image;
+    let thumbImg       = 'src/public/product_images/'+id +'/gallery/thumbnail/' + req.params.image;
+    console.log(originalImg)
 
-//    fs.remove(originalImg,(err)=>{
-//        if(err){
-//            console.log(err);
-//        }
-//        fs.remove(thumbImg,(err)=>{
-//            if(err){
-//                console.log(err)
-//            }else{
+   fs.remove(originalImg,(err)=>{
+       if(err){
+           console.log(err);
+       }
+       fs.remove(thumbImg,(err)=>{
+           if(err){
+               console.log(err)
+           }else{
            
-//             res.redirect('/api/admin/products/edit-product/'+ req.query.id);
-//             console.log('366')
-//            }
-//        })
-//    })
+            res.redirect('/api/admin/products/edit-product/'+ req.query.id);
+            console.log('366')
+           }
+       })
+   })
 
     
 })

@@ -85,6 +85,17 @@ router.post('/add-page',(req,res)=>{
             })
             page.save((err)=>{
                 if(err) return console.log(err)
+
+
+                //for fentend auto update pages when reload without server
+                pages.find({},(err,page)=>{
+                    if(err) return console.log(err);
+                
+                    req.app.locals.pages = page;
+                })
+                
+                
+
                 req.flash('sucess','page added sucessfully')
                 res.redirect('/api/admin/pages')
             })
@@ -181,6 +192,14 @@ router.post('/edit-page/:slug',(req,res)=>{
            
                 page.save((err)=>{
                 if(err) return console.log(err)
+
+                //for frontend auto update changes without restart server
+                pages.find({},(err,page)=>{
+                    if(err) return console.log(err);
+                
+                    req.app.locals.pages = page;
+                })
+                
                 req.flash('sucess','page updated sucessfully')
                 res.redirect('/api/admin/pages')
             })
@@ -206,10 +225,17 @@ router.get('/delete-page/:id',async(req,res)=>{
 
     await pages.findByIdAndDelete({_id : req.params.id}, (err)=>{
 
-        if(err){
-            console.log(err)
-        }
+        if(err) return console.log(err)
 
+        //for frontend auto update pages without server restarting,if you cant use this then you can restart server when you made changes in backend to reflect in frontend
+        pages.find({},(err,page)=>{
+            if(err) return console.log(err);
+        
+            req.app.locals.pages = page;
+        })
+        
+        
+        // req.flash('sucess','page deleted')
         res.redirect( '/api/admin/pages')
 
     })

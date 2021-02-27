@@ -4,10 +4,6 @@ const ejs              = require("ejs");
 const InitMongo        = require("./config/db");
 require("dotenv").config({path : path.join(__dirname,'.env')});
 require('./config/db');
-const routes           = require('./routes/router');
-const adminPage        = require('./routes/admin_page');
-const adminCategory    = require('./routes/admin_categories');
-const products         = require('./routes/admin_products');
 const parser           = require('body-parser');
 const session          = require("express-session");
 const messege          = require("express-messages");
@@ -16,6 +12,7 @@ const fs               = require('fs-extra')
 const resizeImg        = require('resize-img');
 const expressValidator = require('express-validator')
 const app = express();
+
 
 //DataBase connection
 InitMongo();
@@ -30,6 +27,41 @@ app.set('view engine','ejs');
 
 //set public folder (for static files like css and images etc)
 app.use(express.static(__dirname, + './public'));
+
+
+
+//get page model for display pages in frontend
+const pages = require('./models/pages')
+
+//set all pages in header on frontend
+pages.find({},(err,page)=>{
+    if(err) return console.log(err);
+
+    app.locals.pages = page;
+})
+
+
+//get category model for shows categories on frontend
+const categories = require('./models/category')
+
+//set all categories in header on frontend
+categories.find({},(err,cat)=>{
+    if(err) return console.log(err);
+
+    app.locals.categories = cat;
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -92,12 +124,23 @@ app.use(function (req, res, next) {
 
 
 
-//fileUpload middilewere
+//express-fileUpload middilewere
 app.use(fileUpload())
 
 
 
 
+
+
+
+
+const routes           = require('./routes/router');
+const adminPage        = require('./routes/admin_page');
+const adminCategory    = require('./routes/admin_categories');
+const products         = require('./routes/admin_products');
+
+//for display all products  in front end
+const userproducts        = require('./routes/userProduct');
 
 //routes middlewere
 app.use('/api',routes);
@@ -105,6 +148,7 @@ app.use('/api/admin/pages',adminPage)
 app.use('/api/admin/categories',adminCategory)
 app.use('/api/admin/products',products)
 
+app.use('/api/products',userproducts)
 
 
 

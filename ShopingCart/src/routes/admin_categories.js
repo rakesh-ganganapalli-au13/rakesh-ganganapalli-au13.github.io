@@ -6,6 +6,7 @@ const router = require("express").Router();
 const category = require('../models/category')
 
 
+
 /* All category
 Method : get*/
 router.get('/',async(req,res)=>{
@@ -14,6 +15,7 @@ router.get('/',async(req,res)=>{
 
     res.render( 'admin/categories',{categories :categories,error:''})
 })
+
 
 
 
@@ -35,6 +37,11 @@ router.get('/add-category',(req,res)=>{
 })
 
 })
+
+
+
+
+
 
 /* Add category
 Method : post*/
@@ -81,7 +88,18 @@ router.post('/Add-category',(req,res)=>{
             })
             cat.save((err)=>{
                 if(err) return console.log(err)
-                req.flash('sucess','page added sucessfully')
+
+
+                //for fentend auto update pages when reload without server
+                category.find({},(err,cat)=>{
+                    if(err) return console.log(err);
+                
+                    req.app.locals.categories = cat;
+                })
+
+
+
+                // req.flash('sucess','page added sucessfully')
                 res.redirect('/api/admin/categories')
             })
         }
@@ -163,18 +181,26 @@ router.post('/edit-category/:slug',(req,res)=>{
             
         }else{
 
-            category.findById(id,(err,category)=>{
+            category.findById(id,(err,cate)=>{
 
-                if(err) return console.log(err)
+                if(err) return console.log(err);
 
-                category.title    = title
-                category.slug     = slug
+                cate.title    = title;
+                cate.slug     = slug;
            
-                category.save((err)=>{
-                if(err) return console.log(err)
-                req.flash('sucess','page updated sucessfully')
-                res.redirect('/api/admin/categories')
+                cate.save((err)=>{
+                if(err) return console.log(err);
+                
+                 //for frontend auto update pages without server restarting,if you cant use this then you can restart server when you made changes in backend to reflect in frontend
+                category.find({},(err,cat)=>{
+                if(err) return console.log(err);
+                req.app.locals.categories = cat;
+                });
+
+                // req.flash('sucess','page updated sucessfully')
+                res.redirect('/api/admin/categories');
             })
+
         })
     }
 
@@ -194,7 +220,7 @@ router.post('/edit-category/:slug',(req,res)=>{
 
 
 /* delete category
-Method : post*/
+Method : get*/
 router.get('/delete-category/:id',async(req,res)=>{
 
     await category.findByIdAndDelete({_id : req.params.id}, (err)=>{
@@ -202,6 +228,12 @@ router.get('/delete-category/:id',async(req,res)=>{
         if(err){
             console.log(err)
         }
+
+        //for frontend auto update pages without server restarting,if you cant use this then you can restart server when you made changes in backend to reflect in frontend
+         category.find({},(err,cat)=>{
+            if(err) return console.log(err);
+            req.app.locals.categories = cat;
+        })
 
         res.redirect( '/api/admin/categories')
 
