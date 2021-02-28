@@ -1,4 +1,4 @@
-body{
+/* body{
     background-color: rgb(1, 9, 44);
     color: rgb(247, 244, 244);
 }
@@ -6,3 +6,8 @@ body{
 .nav{
     background-color: rgb(6, 0, 36);
 }
+
+.tablehead{
+    background-color:red;
+    color: rgb(34, 19, 170);
+} */

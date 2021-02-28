@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const product = require('../models/products')
 const category = require('../models/category')
+const fs       = require('fs-extra')
 
 
 /* Get api/products
@@ -40,6 +41,53 @@ router.get("/:category",(req,res)=>{
             res.render('catProducts',data)
         })
 
+    })
+
+    
+    
+});
+
+
+
+
+
+/*Method : GET
+get the detailes of products
+api/produts/category/product */
+
+router.get("/:category/:product",(req,res)=>{
+
+    let galleryimage = null;
+
+    
+
+    product.findOne({slug : req.params.product},(err,pro)=>{
+
+            if(err) return console.log(err);
+
+            
+
+            let gallerydir = 'src/public/product_images/'+pro._id+'/gallery';
+
+            fs.readdir(gallerydir,(err,files)=>{
+                if(err) return console.log(err);
+
+                
+
+                galleryimage = files
+
+                let data = {
+                    title : pro.title,
+                    product : pro,
+                    images : galleryimage
+                }
+                // console.log(data.product)
+                res.render('Products',data)
+    
+
+            })
+    
+            
     })
 
     

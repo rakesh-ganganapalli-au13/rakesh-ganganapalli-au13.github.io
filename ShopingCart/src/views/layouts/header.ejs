@@ -25,14 +25,40 @@
       <% if (page.slug == 'home') { %>
         <li><a href="/api/user"> <%= page.title %> </a></li>
       <%} else {%>
-      <li><a href="<%= page.slug %>"> <%= page.title %> </a></li>
+        <!-- <h1><%=page.slug%></h1> -->
+      <li><a href="/api/<%= page.slug %>"> <%= page.title %> </a></li>
       <%}%>
       
       <% }) %>
     </ul>
+
+    <ul class="nav navbar-nav navbar-right">          <!--for display products length in cart-->
+      <li>
+        <a href="/api/cart/checkout">MY Cart(
+
+          <% if (typeof cart != 'undefined' ) {%>
+
+            <%= cart.length %>
+
+          <%}else{%>
+
+                0
+        <%}%>
+
+        
+
+    )</a>
+      </li>
+    </ul>
+
+    <!-- <a href="/api/admin/pages">Admin</a> -->
+
   </div>
 </nav>
   
+
+
+
 <div class="container">
 
   <div class="row">
