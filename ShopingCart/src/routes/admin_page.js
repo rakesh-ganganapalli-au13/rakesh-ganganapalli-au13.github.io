@@ -200,7 +200,7 @@ router.post('/edit-page/:slug',(req,res)=>{
                     req.app.locals.pages = page;
                 })
                 
-                req.flash('sucess','page updated sucessfully')
+                // req.flash('sucess','page updated sucessfully')
                 res.redirect('/api/admin/pages')
             })
         })
