@@ -1,0 +1,26 @@
+form{
+    color:white;
+    height: 250px;
+    width: 200px;
+    margin-left: 40%;
+    margin-right: 50%;
+    margin-top: 5%;
+}
+.submit{
+    margin-left: 60px;
+}
+.submit:hover{
+    cursor: pointer;
+}
+body{
+    background-color: rgb(80, 138, 177);
+}
+div{
+    padding: 10px;
+}
+input{
+    margin-top: 10px;
+}
+a{
+    color: rgb(230, 197, 15);
+}

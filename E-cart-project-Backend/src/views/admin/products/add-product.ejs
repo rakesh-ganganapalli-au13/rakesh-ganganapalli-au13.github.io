@@ -1,0 +1,62 @@
+<%- include('../../layouts/adminheader.ejs') %>
+
+
+
+<h2 class="product-title">Add a new product</h2>
+<a href="/api/admin/products" class="btn btn-primary">Back to All products</a>
+
+<form method="POST" action="/api/admin/products/add-product" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name = "title" value="<%=title%>" placeholder="Enter title" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" name="price" value="<%=price%>" placeholder="Enter price" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="Discription">Discription</label>
+        <textarea name="discription" cols="20" rows="10"  placeholder="Enter description" class="form-control"><%=discription%></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Category">Category</label>
+        <select name="category" class="form-control">
+            <% category.forEach((cat)=> { %>
+                <option value="<%= cat.slug %>"><%= cat.slug %></option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="form-group">
+       <label for="image">Image</label>
+       <input type='file' name="image" onchange="readLiveURL(this);"  class="form-control" />
+       <img id="livepreview" src="#" alt=" image " />
+    </div>
+
+    <button class="btn btn-primary">Submit</button> 
+   
+</form>
+
+<!-- preview the image  -->
+<script>
+    function readLiveURL(input) {
+            if (input.files && input.files[0]) {
+                var filereader = new FileReader();
+                filereader.onload = function (e) {
+                    $('#livepreview')
+                        .attr('src', e.target.result)
+                        .width(100)
+                        .height(100);
+                };
+                filereader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+
+
+<%- include('../../layouts/adminfooter.ejs')  %>

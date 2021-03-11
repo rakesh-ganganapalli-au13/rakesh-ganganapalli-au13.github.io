@@ -1,0 +1,35 @@
+/* adding products page preview image class */
+#livepreview{
+    margin : 20px;
+  }
+
+/* adding products page preview image class */
+  .cimg{
+    width : 100px;
+    height: 100px;
+  }
+
+/* display adminproducts page  image class */
+  .pimg{
+
+    width : 200px;
+    height: 300px;
+
+  }
+
+/* for product detailes page image class */
+  .uimg{         
+
+    width : 400px;
+    height: 500px;
+
+  }
+
+  .buyNow{
+
+    width : 100px;
+    height: 100px;
+
+  }
+
+  

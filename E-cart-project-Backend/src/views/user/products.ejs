@@ -1,0 +1,25 @@
+<%- include('../layouts/userHeader') %>
+
+<h1><%=name%></h1>
+
+<div class="row">
+    <% products.forEach((p)=>{ %>
+
+        <div class="col-xs-12 col-md-4">
+
+            <a href="/api/user/<%= p.category %>/<%= p.slug %>" class="pa">
+
+                <img src="<%=p.img_url%>" alt="images" class="pimg">
+            
+            </a>
+            <h3><%=p.title%></h3>
+            <h6>$<%=parseFloat(p.price).toFixed(2)%></h6>
+            <a href="/api/user/<%=p.category%>/<%=p.slug%>" class="vd">View Details</a>
+        </div>
+        <%})%>
+</div>
+
+
+
+
+<%- include('../layouts/userFooter') %>

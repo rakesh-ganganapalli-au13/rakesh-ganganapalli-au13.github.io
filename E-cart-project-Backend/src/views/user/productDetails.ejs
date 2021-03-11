@@ -1,0 +1,30 @@
+<%- include('../layouts/userHeader') %>
+
+
+<h1 class="page-header"><%=product.title%></h1>
+
+<div class="col-xs-12 col-md-8">
+    <img src="<%=product.img_url%>" alt="image" class="uimg"><br>
+</div>
+
+<div class="col-xs-12 col-md-4 text-left"> 
+
+    <p><%=product.discription%></p>
+    <p>$<%=parseFloat(product.price).toFixed(2)%></p>
+
+
+    <a href="/api/cart/add/<%=product.slug%>"><input type="button" value = "Add to cart" class="btn btn-primary"></a>
+    <!-- <a href="">Please Login to Buy a product</a> -->
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <a href="/api/cart/add/<%=product.slug%>"><img src="https://www.nationalcrimesyndicate.com/wp-content/uploads/2017/07/buy_now_star.jpg" alt="buyNow" class="buyNow"></a>
+
+</div>
+
+
+
+<%- include('../layouts/userFooter') %>

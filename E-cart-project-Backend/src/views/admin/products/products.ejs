@@ -1,0 +1,62 @@
+<%- include('../../layouts/adminheader.ejs') %>
+
+<h2 class="page-title text-center">Products</h2>
+<a href="/api/admin/products/add-product" class="btn btn-primary">Add a new product</a>
+
+
+<% if (count > 0) { %>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% products.forEach((product)=> {%>
+
+                <tr>
+                    <td> <%= product.title %> </td>
+                    <td> <%= product.category %> </td>
+                    <td> $<%= parseFloat(product.price).toFixed(2) %> </td>
+
+                    <td> <% if(product.image == '') { %> 
+
+                           <img src="/images/Noimg.jpg" alt="no image" width="100px" height="100px">
+                    
+                        <%} else {%>
+
+                            <img src="<%=product.img_url%>" alt="no image" width="100px" height="100px">
+
+
+                       <%}%>
+                    </td>
+
+                    
+
+                    <td><a href='/api/admin/products/edit-product/<%= product._id %>'>Edit</a></td>
+                    <td><a href='/api/admin/products/delete-product/<%= product._id %>'>Delete</a></td>
+
+                </tr>
+
+            <% })  %>
+        </tbody>
+    </table>
+
+<% } else { %>
+
+    <h3  class="text-center">Their are no products</h3>
+
+<% } %>
+
+
+
+
+
+<%- include('../../layouts/adminfooter.ejs')  %>

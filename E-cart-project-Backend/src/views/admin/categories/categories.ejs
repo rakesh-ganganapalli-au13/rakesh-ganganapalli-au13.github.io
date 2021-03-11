@@ -1,0 +1,46 @@
+<%- include('../../layouts/adminHeader.ejs') %>
+
+
+
+<div>
+    <h1 class="text-center">Categories</h1>
+</div>
+
+<a href="/api/admin/categories/add-category" class="btn btn-primary">Add a new category</a>
+
+<div class="container">
+    <table class="table">
+       <thead>
+         <tr>
+           <th>Category</th>
+           <th>Edit</th>
+           <th>Delete</th>
+         </tr>
+       </thead>
+
+       <tbody>
+      
+    
+        <% Allcategories.forEach((cat)=>{ %>
+
+            <tr>
+                <td><%= cat.title %> </td>
+
+                <td><a href='/api/admin/categories/edit-category/<%= cat.slug %>'>Edit</a></td>
+
+                 <td><a href='/api/admin/categories/delete-category/<%= cat._id %>'>Delete</a></td>
+
+             
+            </tr>
+
+        <%})%>
+      
+     </tbody>
+    
+</table>
+
+    </table>
+
+
+
+<%- include('../../layouts/adminFooter.ejs') %>

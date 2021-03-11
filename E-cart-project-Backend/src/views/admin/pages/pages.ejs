@@ -1,0 +1,47 @@
+<%- include('../../layouts/adminHeader.ejs') %>
+
+
+
+<div>
+    <h1 class="text-center">pages</h1>
+</div>
+
+<a href="/api/admin/pages/add-page" class="btn btn-primary">Add a new page</a>
+
+<div class="container">
+    <table class="table">
+       <thead>
+         <tr>
+           <th>Title</th>
+           <th>Edit</th>
+           <th>Delete</th>
+         </tr>
+       </thead>
+
+       <tbody>
+    
+        <% Allpages.forEach((page)=>{ %>
+
+            <tr>
+                <td><%= page.title %> </td>
+                <td><a href='/api/admin/pages/edit-page/<%= page.slug %>'>Edit</a></td>
+
+                <% if(page.slug == 'home'){%>
+                    <td></td>
+                <%}else {%>
+                    <td><a href='/api/admin/pages/delete-page/<%= page._id %>'>Delete</a></td>
+
+                <% } %>
+
+            </tr>
+
+        <%})%>
+     </tbody>
+    
+</table>
+
+    </table>
+
+
+
+<%- include('../../layouts/adminFooter.ejs') %>

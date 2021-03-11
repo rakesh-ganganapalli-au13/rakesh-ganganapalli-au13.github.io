@@ -1,0 +1,72 @@
+<%- include('../layouts/userHeader') %>
+    <% if(typeof cart !== 'undefined') {%>
+        <h1>My Cart</h1>
+        <br>
+        <table class="table table-striped">
+
+            <tr  class="tablehead"> 
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Sub totel</th>
+            </tr>
+
+            <% let totel = 0 %>
+            <% cart.forEach((product)=>{%>
+
+                <% let sub = parseFloat(product.qty * product.price).toFixed(2) %>
+                <% totel += +sub %>
+
+                <tr>
+                    <td><img src="<%= product.image%>" alt="cart images" class="cimg"></td>
+                    <td><%= product.title%></td>
+                    <td><%= product.price%></td>
+                    <td><%= product.qty%></td>
+                    <td>
+                        <a href="/api/cart/update/<%=product.title%>?action=add">+</a>&nbsp
+                        <a href="/api/cart/update/<%=product.title%>?action=remove">-</a>&nbsp
+                        <a href="/api/cart/update/<%=product.title%>?action=clear">clear</a>&nbsp
+                    </td>
+                    <td>$<%= sub%></td>
+                </tr>
+                
+           <% })%>
+
+           <tr>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+             <td ><strong>Totel:</strong>$<%= parseFloat(totel).toFixed(2)%></td>
+           </tr>
+
+           <tr>
+
+               
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="btn btn-danger" href="/api/cart/clear">Clear Cart</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="#">Buy Now</a>
+                </td>
+
+            </tr>
+
+        </table>
+
+    <% } else {%>
+
+        <h1>Your Cart Is Empty</h1>
+    
+        <% } %>
+        
+    
+
+<%- include('../layouts/userFooter') %>
