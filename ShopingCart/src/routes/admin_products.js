@@ -10,8 +10,7 @@ const path = require('path')
 const products = require('../models/products')
 //category model
 const categories = require('../models/category');
-const { writeFileSync } = require("fs-extra");
-const { isValidObjectId } = require("mongoose");
+
 
 
 
@@ -72,6 +71,7 @@ Method : post*/
 router.post('/add-product',(req,res)=>{
 
     //checking image file is undefined or not
+    // console.log(req.files)
     if(!req.files){ imgFile =""; }
 
     if(req.files){
@@ -95,7 +95,7 @@ router.post('/add-product',(req,res)=>{
 
     const errors = req.validationErrors()
 
-    console.log(errors)
+    // console.log(errors)
     
     if(errors.length){
 

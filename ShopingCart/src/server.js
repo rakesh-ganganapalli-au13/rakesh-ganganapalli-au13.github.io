@@ -1,15 +1,13 @@
 const express    = require("express");
 const path             = require('path');
-const ejs              = require("ejs");
 const InitMongo        = require("./config/db");
 require("dotenv").config({path : path.join(__dirname,'.env')});
-require('./config/db');
 const parser           = require('body-parser');
 const session          = require("express-session");
-const messege          = require("express-messages");
+// const messege          = require("express-messages");
 const fileUpload       = require('express-fileupload')
-const fs               = require('fs-extra')
-const resizeImg        = require('resize-img');
+// const fs               = require('fs-extra')
+// const resizeImg        = require('resize-img');
 const expressValidator = require('express-validator')
 const app = express();
 
@@ -55,21 +53,9 @@ categories.find({},(err,cat)=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //body parser setup middlewere
-app.use(parser.json());
-app.use(parser.urlencoded({extended:true}));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 
 
@@ -113,18 +99,12 @@ app.use(session({
 
 
 
-//express-messeges middilewere setup
-// app.use(require('connect-flash')());
-// app.use(function (req, res, next) {
-//   res.locals.messages = messege(req, res);
-//   next();
-// });
 
 app.get('*',(req,res,next)=>{
+    // console.log(req.session.cart)
     res.locals.cart = req.session.cart
     next()
 })
-
 
 
 
@@ -143,11 +123,13 @@ app.use(fileUpload())
 const adminPage        = require('./routes/admin_page');
 const adminCategory    = require('./routes/admin_categories');
 const products         = require('./routes/admin_products');
+const authentication   = require('./routes/authentication')
 
-//for display all products and pages and categories in user end
-const userPage           = require('./routes/pages');
-const userproducts        = require('./routes/userProduct');
-const cart         = require('./routes/cart');
+//for display all pages and categories and products in user end
+const userPage         = require('./routes/pages');
+const userproducts     = require('./routes/userProduct');
+const cart             = require('./routes/cart');
+
 
 
 //routes middlewere
@@ -159,6 +141,8 @@ app.use('/api',userPage);
 app.use('/api/products',userproducts)
 app.use('/api/cart',cart);
 
+
+// app.use('/api',authentication);
 
 
 

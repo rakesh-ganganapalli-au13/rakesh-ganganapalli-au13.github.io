@@ -169,7 +169,6 @@ router.post('/edit-category/:slug',(req,res)=>{
     category.findOne({slug : slug, _id :{$ne : id}},(err,page)=>{
 
         if(page){
-            req.flash('danger','page already exists')
             const data = {
                 id       : id,
                 title    : title,

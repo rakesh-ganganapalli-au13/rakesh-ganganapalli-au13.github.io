@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { checkBody, validationResult } = require("express-validator");
+require("express-validator");
 
 const router = require("express").Router();
 
@@ -23,6 +23,7 @@ router.get('/',async(req,res)=>{
 /* Add page
 Method : get*/
 router.get('/add-page',(req,res)=>{
+    
     let data = {
         title : '',
         slug : '',
@@ -67,7 +68,7 @@ router.post('/add-page',(req,res)=>{
     pages.findOne({slug : slug},(err,page)=>{
 
         if(page){
-            req.flash('danger','page already exists')
+            // req.flash('danger','page already exists')
             const data = {
 
                 title    : title,
@@ -96,7 +97,7 @@ router.post('/add-page',(req,res)=>{
                 
                 
 
-                req.flash('sucess','page added sucessfully')
+                // req.flash('sucess','page added sucessfully')
                 res.redirect('/api/admin/pages')
             })
         }

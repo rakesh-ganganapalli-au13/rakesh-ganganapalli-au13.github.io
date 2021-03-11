@@ -6,8 +6,8 @@ const pages = require('../models/pages')
 
 router.get("/user",(req,res)=>{
     let data = {
-        title : "Home page",
-        contant : "home page"
+        title : "Home",
+        contant : "hello users!!welcome to our website,we have great deales for you!!Happy shoping."
     }
     res.render('index',data)
 });
@@ -15,10 +15,10 @@ router.get("/user",(req,res)=>{
 
 /* Get api/page and display page conant*/
 
-router.get("/:slug",(req,res)=>{
+router.get("/:slug",async(req,res)=>{
     // console.log(req.params.slug)
     let slug = req.params.slug;
-    pages.find({slug:slug},(err,page)=>{
+    await pages.find({slug:slug},(err,page)=>{
         if(err) return console.log(err)
 
         if(!page.length){ 

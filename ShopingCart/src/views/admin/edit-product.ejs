@@ -26,11 +26,13 @@
         <label for="Category">Category</label>
         <select name="category" class="form-control">
             <% category.forEach((cat)=> { %>
-                <option value="<%= cat.slug %>"><%= cat.slug %></option>
+                <option value="<%= cat.slug %>"
+                    <% if (cat.slug == category2) { %>
+                        selected : "selected"
+                    <% } %>
+                 ><%= cat.slug %></option>
 
-                <%if (cat.slug == category2) { %>
-                    selected : "selected"
-                <% } %>
+                
 
             <% }) %>
         </select>

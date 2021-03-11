@@ -19,7 +19,7 @@ router.get("/add/:product",(req,res)=>{
 
         if(err) return console.log(err)
 
-        // console.log(req.session.cart)
+        console.log(req.session.cart)
         
 
         if(typeof req.session.cart == 'undefined'){ 
@@ -31,11 +31,13 @@ router.get("/add/:product",(req,res)=>{
                 image : '/product_images/'+p.id+'/'+p.image
 
             })
+
+            // console.log(req.session.cart)
           
         }else{
 
                 let cart = req.session.cart
-                let newitem =true
+                let newitem = true
 
                 for(let i=0;i<cart.length;i++){
                     if(cart[i].title==slug){
@@ -126,7 +128,6 @@ router.get("/update/:product",(req,res)=>{
                 case "remove" :
                     cart[i].qty--;
                     if(cart[i].qty <1 ) cart.splice(i,1);
-                    
                     break;
                 case "clear" :
                     cart.splice(i,1)

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        form{
+            text-align: center;
+        }
+
+        div{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <% if(error.length) { %> 
+          <% error.forEach(function(err){ %>
+            <div class="alert alert-danger">
+              <%= err.msg %>
+            </div>
+         <% }); %>
+        <% } %>
+     </div>
+
+    <div>
+        <form method="POST"  action="/api">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" value="<%=name%>" placeholder="Enter your name">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" name="email" value="<%=email%>" placeholder="Enter your email">
+            </div>
+            <div>
+                <label for="phone">Phone</label>
+                <input type="number" name="phone" value="<%=phone%>" placeholder="Enter your cell number" min="10">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" value="" placeholder="Enter your password" min="6">
+            </div>
+            <div>
+                <label for="password">Conform Password</label>
+                <input type="password" name="rpassword" value="" placeholder="Re enter your password" min="6">
+            </div>
+            <div>
+                <input type="checkbox" name="checkbox">
+                <label for="checkbox">Agree terms and conditions</label>
+            </div>
+
+            <input type="submit" value="signup">
+
+        </form>
+    </div>
+
+   
+    
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>   
+</body>
+</html>
