@@ -1,0 +1,76 @@
+=> when installing react internally installed BUNDLERS(webpack) and BABEL
+	webpack => bundled the similar types of files into one file.
+	babel   => converts the es6 into es5 then only browser can understand the js.
+
+
+1) differnce between framework and library :
+	
+	Nodejs => js Runtime environment 
+	Express => Framework
+	ReactJs => Library
+	
+	both are used to make a thing easy to all of us.
+	
+	
+	frame work has set of rules(or) structure and also called our code  => called our code   
+
+	library has minimal rules that rules also defined by us             => we are calling a code when we need that code also we defined
+
+	ex: HOUSE(library)  and  SCHOOL(framework)
+		
+		in house we put our things in any were      (we are define the rules)
+		in school we put our thing in our rack only (rules we have to fallow)
+
+
+
+=>  REACT introduced by facebook(2011) and open sourced in 2013
+
+=>  REACT IS A open source JAVASCRIPT LIBRARY   (what)       =>          EXPRESS IS NODEJS FRAMEWORK 
+
+=>  only focus or resposible in UI		(what purpose use)
+
+=>  React is used to build single-page applications(SPAs).
+
+=>  it is component architecture                             => meanes every thing in react called as component  EX: header and footer both are called a components in react
+
+=>  ReactJS is a JavaScript library used for building reusable UI components. This means it is a view library that uses components 
+    to change content on the page without refreshing which is the core principle behind single-page applications.
+
+
+NPX: node package excutor
+	=> it is a npm plugin runner it will install when we install node
+
+
+ NPX create-react-app project_name => create a react project command excuted and app is created
+ then go to project folder and  run the project NPM START
+
+
+
+
+pakage.json :
+
+		=> It is a plain text JSON file which contains the basic information about the project
+		=> This file is used to hold the various metadata and information about the project in the simple plain text and as a JSON file.
+
+pakage_lock.json :
+
+		=>used to maintain the modules version. when i am using the v11 in this time in my project after some time v12 is released then you hit npm install
+		then new version is instslled to avoid the new version and use the same version(v11) then this will help you.
+
+nodemodules :
+
+		=>all modules raw data or logic code is stored in it.
+
+
+
+
+	
+manifest file:
+
+	=>The web app manifest provides information about an application (such as name, author, icon, and description) in a JSON text file. The purpose of the manifest is to install web applications to the homescreen of a device, providing users with quicker access and a richer experience.
+	=>manifest.json is the json file that is mostly used to describe our app On mobile phones
+
+	=>Web app manifest files provide the capability to change how an installed application will look like on the user's 
+	desktop or mobile device. By modifying properties in the JSON file, you can modify a number of details in your application, including its:
+	=>If you're building a site that you think does not need to be installed on a device, remove the manifest and the <link> element in the HTML file that points to it.
+	If you would like users to install the application on their device, modify the manifest file (or create one if you are not using CRA) with any properties that you like. The MDN documentation explains all the required and optional attributes.
